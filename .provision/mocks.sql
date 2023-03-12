@@ -8,7 +8,7 @@ BEGIN
     DELETE FROM emails;
     DELETE FROM users;
 
-    WHILE (i <= 1000000) DO
+    WHILE (i <= 999999) DO
             INSERT INTO `users` (username, email, validts, confirmed) values (
                 CONCAT('user_', i),
                 CONCAT('email_', i, '@gmail.com'),
