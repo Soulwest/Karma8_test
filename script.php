@@ -137,7 +137,7 @@ while (pcntl_waitpid(0, $status) !== -1)
 // TODO: pcntl_signal(SIGINT, "signal_handler"), BUT we already have it in shared memory
 // First of all take everything from a storage
 $emailsDB = shmop_read($shmEId, 0, emailStorageSize);
-if ( ! empty($emailsDB))
+if ( ! empty(trim($emailsDB)))
 {
 	// reset email storage
 	shmop_write($shmEId, str_repeat("\0", emailStorageSize), 0); // instead shmop_delete($shmEId);

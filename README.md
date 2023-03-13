@@ -3,17 +3,22 @@ Karma8 test task
 
 ## Install 
 
-- install mysql and create schema (.provision/schema.sql) 
+First of add copy and properly fill .env file from [.env.example](.env.example)
+
+```docker-compose up```
+
+OR 
+
+- install mysql and create schema (.provision/docker/initdb.d/schema.sql) 
 - install php pcntl-fork
 - install php shmop
-- create config/db_credentials.php
 - add to minutely cron
  ```* * * * * php /srv/www/script.php```
 
 ## Run
 
 - Open http://localhost/script.php
-- ```php script.php```
+- login to docker container and run ```php script.php```
 
 ## TODO
 

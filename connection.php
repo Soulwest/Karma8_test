@@ -1,15 +1,30 @@
 <?php
-require_once('config/db_credentials.php');
-
 function dbConnection()
 {
-	$connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+	if (! getenv("DB_SERVER"))
+	{
+		// try to load from .env manually
+		$env = parse_ini_file('.env');
+		foreach ($env as $varName => $varVal)
+		{
+			putenv("$varName=$varVal");
+		}
+	}
 
-	if(mysqli_connect_errno()) {
+	try
+	{
+		$connection = mysqli_connect(getenv("DB_SERVER"), getenv("DB_USER"), getenv("DB_PASS"), getenv("DB_NAME"));
+	}
+	catch (Exception)
+	{
 		$msg = "Database connection failed: ";
-		$msg .= mysqli_connect_error();
-		$msg .= " : " . mysqli_connect_errno();
+		if (mysqli_connect_errno())
+		{
+			$msg .= mysqli_connect_error();
+			$msg .= " : ".mysqli_connect_errno();
+		}
 		exit($msg);
 	}
+
 	return $connection;
 }
