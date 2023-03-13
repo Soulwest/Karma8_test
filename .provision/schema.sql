@@ -14,6 +14,9 @@ add constraint users_username_pk
 add constraint users_email_pk
     unique (email);
 
+alter table users
+    add last_notification timestamp default null;
+
 
 create table emails (
     email varchar(255) not null
